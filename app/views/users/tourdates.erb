@@ -1,8 +1,9 @@
-tourdates.html
+tourdates.erb
+
 <h2>"Let's get some gigs, <%=@user.first_name.capitalize%>!"</h2>
 
 <h3>Link to a venue for its details. </h3>
-<form action="/users/tourdates" method="POST">
+<form action="/tourdates/<%= @user.id %>" method="POST">
 
 <% @venues.each do |venue| %>
   <input type="radio" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>">    

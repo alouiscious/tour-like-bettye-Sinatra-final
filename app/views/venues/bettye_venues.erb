@@ -1,0 +1,12 @@
+<h2>Here are venues you can check out.</h2>
+
+"Let's get some gigs, <%= @user.first_name.capitalize%>!"</h2>
+<form action="/tourdates/<%= @user.user_id %>/edit" method="POST">
+
+<% @venues.each do |venue| %>
+  <input type="checkbox" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>"><label for="<%= venue.id %>"><a href="<%= venue %>"><%= venue.name %></a></label>
+  <br>
+<% end %>
+  <input id="tours" type="submit" value="Create/Add Tour Venue">
+
+</form>

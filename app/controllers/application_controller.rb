@@ -13,7 +13,7 @@ class ApplicationController < Sinatra::Base
   end
   
   get '/' do
-    erb :'/users/index'
+    erb :'/index.html'
   end
   private
 

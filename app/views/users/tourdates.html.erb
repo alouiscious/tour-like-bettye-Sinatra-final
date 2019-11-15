@@ -1,0 +1,17 @@
+tourdates.html
+<h2>"Let's get some gigs, <%=@user.first_name.capitalize%>!"</h2>
+
+<h3>Link to a venue for its details. </h3>
+<form action="/users/tourdates" method="POST">
+
+<% @venues.each do |venue| %>
+  <input type="radio" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>">    
+  <label for="<%= venue.id %>"><a href="<%= venue %>"><%= venue.name %></a></label>
+  <h5>      <%=venue.city%>, <%= venue.state%></h5>
+
+
+<% end %>
+  <h3>Select the venues you wish to tour.</h3>  
+  <input id="tours" type="submit" value="Create/Add Tour Item">
+
+  </form>

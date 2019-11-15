@@ -11,8 +11,8 @@ class SessionsController < ApplicationController
     if @user.save
       redirect "/login" #ask about autologin
     else
-      # redirect "/failure"
-      erb :'/sessions/failure'
+      redirect "/failure"
+      # erb :'/sessions/failure'
     end
   end
 
@@ -28,13 +28,13 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       session[:first_name] = user.first_name
       session[:last_logged_in_at] = DateTime.now
-      redirect "/user"
+      redirect "/success"
     else
       redirect "/failure"
     end
   end
 
-  get '/user' do
+  get '/success' do
     # binding.pry
     if Helpers.logged_in?(session)
       @current_user = User.find_by_id(session[:user_id])

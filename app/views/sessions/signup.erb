@@ -1,0 +1,45 @@
+signup.erb
+
+<table>
+  <td width="80%">
+    <h2>
+      Please setup a tour account by entering your details
+    </h2>
+      <div class='signup'>
+      <form action="/signup" method="POST">
+      <label>First Name: </label>
+      <input id="first_name" type="text" name="first_name" required> *
+      <br><br>
+      <label>Last Name: </label>
+      <input id="last_name" type="text" name="last_name" required> *
+      <input id="fullname" type="hidden" name="fullname" value="user[:first_name][:last_name]">
+      <br><br>
+      <label>Band/Artist Name: </label>    
+      <input id="bandname" type="text" name="bandname" >
+      <br><br>
+      <label for="nickname">Nickname: </label>
+      <input id="nickname" type="text" name="nickname">
+      <br><br>
+      <label for="email">Email: </label>
+      <input id="email" type="text" name="email" required> *
+      <br><br>
+      <label>Phone: </label>    
+      <input id="phone" type="phone" name="phone" >
+      <br><br> 
+      <label>Zip Code: </label>    
+      <input id="zipcode" type="text" name="zipcode" required> *
+      <br><br> 
+      <label for="username">Username: </label>
+      <input id="username" type="text" name="username"required> *
+      <br>
+      <label>Password: </label>
+      <input id="password" type="text" name="password" required> *
+      <br><br>
+
+      <input id="create_acct" type="submit" name="create_acct" value="Create Account">
+    </div> 
+  </form>   
+
+  </td>
+  <td halign="top"><h5>* = is required</td>
+  </table>

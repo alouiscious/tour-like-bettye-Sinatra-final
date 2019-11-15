@@ -1,0 +1,24 @@
+success.erb
+
+<%@user = User.find(session[:user_id])%>
+<h2>"Welcome, <%= @user.first_name.capitalize %>!"</h2>
+<p>I sayyyyy - welcome to the start you the first major tour.<br>
+Use the reserch and mapping tools to discover venues that are a perfect fit for your performaces.</p>
+
+<ul>
+  <h3>Collect a good list of Q&As</h3>
+  <li>Discover the best ways individual venues communicate.</li>
+  <li>Discover the expected plans for advertising and pre-op budgets.</li>
+  <li>Stay connected to the marketing and techincal teams for each venue.</li>
+  <li>Learn why, despite how ever bad ass your act is, why you should/shouldn't play a specific venue.</li>
+  <li>Understand merch load/savles expectancies.</li>
+</ul>
+
+<h3>Then go there and kick ass and make a name for yourself!<h3>
+<a href="/users/venues">Resume Tour Planning</a>
+<!-- # show existing tour and venue selection-->
+<br>
+<a href="/venues/">Find New Tour Stops</a> 
+<!-- Research additional tour stops.-->
+<br> Goodluck, 
+<br>Alouiscious.

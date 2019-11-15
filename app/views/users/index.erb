@@ -1,0 +1,31 @@
+index.erb
+
+
+            <div class="col-md-8 col-md-offset-2">
+                  <h2>Tour like a pro!</h2>
+
+            <div class="content">
+                  <h1>Tour Like Bettye</h1>
+                  <p>To select venues and create your touring circuit.</p>
+                  <h2>Please <a href="/login">Log In</a> or <a href="/signup">Sign Up</a> </h2>
+            </div>
+
+            <div class="sidebar">
+                  <% if session[:first_name]%>
+                        <h3>Welcome Back <%= session[:first_name] %></h3>
+                  <ul>
+                        <li><b>Last Update:</b> <%= session[:last_logged_in_at] %>
+                  <%elsif !session[:first_name]%>
+                        <h3>Welcome New Artist</h3> 
+                  <ul>
+                        <li><b>First Update:</b> New User </li>
+                  <%end%>
+                        <li><b>Created with Ruby:</b> <%= RUBY_VERSION %></li>
+                        <li><b>Environment:</b> <%= ENV["RACK_ENV"] %></li>
+                        <li><b>Server:</b> <%= @env["SERVER_SOFTWARE"] %></li>
+                        <li><b>Port:</b> <%= @env["SERVER_PORT"] %></li>
+                  </ul>
+            </div>
+
+            </div>
+            </div>

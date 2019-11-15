@@ -1,4 +1,4 @@
-class Tourdates < ActiveRecord::Migration[5.2]
+class TourDates < ActiveRecord::Migration[5.2]
   def change 
     create_table :tourdates do |t|
       t.integer :user_id

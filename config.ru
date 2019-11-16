@@ -12,5 +12,5 @@ use Rack::MethodOverride
 run ApplicationController
 use SessionsController
 use UsersController
-# use VenuesController
+use VenuesController
 

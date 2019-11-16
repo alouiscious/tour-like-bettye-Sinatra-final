@@ -30,6 +30,12 @@
     width: 85%;
   }
 
+  nav {
+    font-size: 10px;
+    text-align: right;
+    padding: 0%;
+  }
+
   h1 {
     font-size: 36px;
     line-height: 54px;

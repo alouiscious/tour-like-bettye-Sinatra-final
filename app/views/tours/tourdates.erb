@@ -1,0 +1,17 @@
+tourdates.erb
+
+<h2>"Let's get some gigs, <%=@user.first_name.capitalize%>!"</h2>
+<div class="selected_venues">
+<h3>Click for venue details. </h3>
+<form action="/tourdates/<%= @user.id%>/edit" method="POST">
+
+  <% @tourdates.each do |tourdate| %>
+    <% if @user.tourdates.include?(tourdate) %>
+      <input type="checkbox" name="user[tourdate_ids][]" id="<%= tourdate.id %>" value="<%= tourdate.id %>" <%='checked' if @user.tourdates.include?(tourdate) %>> 
+      <label for="<%= tourdate.id %>"><a href="<%= tourdate %>"><%= tourdate.name %></a></label>
+      <h5>      <%=tourdate.city%>, <%= tourdate.state%></h5>
+    <% end %>
+  <% end %>
+
+</form>  
+

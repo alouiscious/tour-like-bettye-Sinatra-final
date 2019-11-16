@@ -1,12 +1,17 @@
-<h2>Here are venues you can check out.</h2>
+<h2>Tour Like Bettye, <%= @user.first_name.capitalize %>!!</h2> 
+<p>Check some choices and add to your tourdates, <br>or click on a venue for tourstop research.</p>
 
-"Let's get some gigs, <%= @user.first_name.capitalize%>!"</h2>
-<form action="/tourdates/<%= @user.user_id %>/edit" method="POST">
+<h4>Let's start by researching these venues. </h4>
+<br>
+<ul>
+  <% @venues.all.each do |venue| %>
+    <li><a href="/venues/<%= venue.id %>" value="<%= venue.id %>"><%= venue.name %></a></li>
+  <% end %>
+</ul>
 
-<% @venues.each do |venue| %>
-  <input type="checkbox" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>"><label for="<%= venue.id %>"><a href="<%= venue %>"><%= venue.name %></a></label>
-  <br>
-<% end %>
-  <input id="tours" type="submit" value="Create/Add Tour Venue">
+  <form action="/tourdates/<%=@user.id%>" method="POST">
+<br>
+  When you're done with your research click here to 
+  <input id="tours" type="submit" value="Create/Add Tourdates">
 
 </form>

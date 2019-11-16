@@ -1,0 +1,11 @@
+  <div class="user_detail_edits">
+    <form action="/users/<%=@user.id%>" method="POST">
+
+      <input id="hidden" type="hidden" name="_method" value="patch">
+      <label>Edit your User details:</label>
+      <br>
+      <input type="text" name="user[first_name]" value="<%= @user.first_name %>" placeholder="Edit your first name"/>
+      <input id="user_details" type="submit" value="Update Your Details">      
+    </form>
+    <br>
+  </div>

@@ -8,7 +8,7 @@ layout.erb
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="width=device-width, chrome=1" />
 
-    <title>TourLikeBettye</title>
+    <title>TourLikeBettye - <%= @page_title %></title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -27,7 +27,9 @@ layout.erb
 
     <div class="container">
       <header><img src="images/TLB_hdr01.jpeg" class="img-responsive main-image"></header>
-
+        <div style="color: red; padding-top: 28">
+          <%= @error %>
+        </div>
         <%= yield %>
 
       <footer class="branding">

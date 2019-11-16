@@ -1,6 +1,9 @@
 <h1>new custom venue</h1>
 <form action="/venues" method="POST">
-  <input id="name" type="text" name="venue[name]"/>
-  <textarea row=5 cols=40 name="venue[notes]">Keep track of your booking progress</textarea>
+
+  <label for="name" style="display: block;">
+  <input id="name" type="text" name="name" />
+  <textarea row=5 cols=40 name="notes">Keep track of your booking progress</textarea>
+ 
   <input id="custom_venue" type="submit" value="Add Custom Venue">
 </form>

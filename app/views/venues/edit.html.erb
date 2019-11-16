@@ -1,0 +1,15 @@
+  <div class="custom_venue">
+      <h1>Edit Your Custom Venue</h1>
+      <a href="/venues/<%= @venue.id %>/edit ">Reload</a>
+      <form action="/venues/<%= @venue.id %>" method="POST">
+        <input id="hidden" type="hidden" name="_method" value="patch">
+        <label for="name" style="display: block;" >Venue Name: </label>
+        <br>
+        <input type="text" name="name" id="venue_name" value="<%= @venue.name %>" />
+        <br>
+        <br>
+      
+        <input id="update_venue " type="submit" value="Update Venue">
+    </form>
+    
+  </div>

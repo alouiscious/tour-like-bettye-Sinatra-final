@@ -1,5 +1,7 @@
 class Venue < ActiveRecord::Base
 
- has_many :tourdates
- has_many :users, through: :tourdates
+ has_many :users
+ has_many :tourdates, through: :users
+
+ 
 end

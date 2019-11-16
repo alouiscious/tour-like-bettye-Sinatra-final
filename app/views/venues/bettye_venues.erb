@@ -3,11 +3,13 @@
 
 <h4>Let's start by researching these venues. </h4>
 <br>
+<form action="/venues/<%= @venue_id %>" method="POST">
 <ul>
   <% @venues.all.each do |venue| %>
     <li><a href="/venues/<%= venue.id %>" value="<%= venue.id %>"><%= venue.name %></a></li>
   <% end %>
 </ul>
+</form>
 
   <form action="/tourdates/<%=@user.id%>" method="POST">
 <br>

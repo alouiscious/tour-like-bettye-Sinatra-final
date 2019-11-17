@@ -7,10 +7,12 @@ require 'open-uri'
 # end
 
 require_all 'app'
+
 use Rack::MethodOverride
 
 run ApplicationController
+# run VenuesController
 use SessionsController
-use UsersController
 use VenuesController
+use UsersController
 

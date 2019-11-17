@@ -1,12 +1,17 @@
-require './config/environment'
+# require './config/environment'
 
 class UsersController < ApplicationController
   get '/tourdates' do
-
+    @user = User.find(session[:user_id])
+    @venues = Venue.all
+    erb :'tours/tourdates.html'
   end
 
   post '/tourdates' do       # collect users tourdates 
-
+    binding.pry
+    @ve = Venue.create(user["venue_ids"])
+    @tourdates << @tourdate
+    redirect '/tourdates/new'
   end
 
   get '/tourdates/:id' do    # renders the user's collected tour dates

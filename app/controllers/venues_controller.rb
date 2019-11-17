@@ -1,12 +1,17 @@
-require './config/environment'
+# require './config/environment'
 
 class VenuesController < ApplicationController
+  get '/' do
+    redirect '/venues'
+  end
+  
   # renders a full list of tour dates
   get '/venues' do          
     if Helpers.current_user(session)
       @user = User.find(session[:user_id])
-      @venues = Venue.all
-      @tourdates = Tourdate.all   # venues.html and button routes to tourdates/edit
+      @venues = Venue.visible
+      # @tourdates = q   # venues.html and button routes to tourdates/edit
+    binding.pry
     end                             # has links that reveal each venue details
     erb :'/venues/bettye_venues'    
   end
@@ -49,6 +54,14 @@ class VenuesController < ApplicationController
       @error = "Venue couldn't update: #{@venue.errors.full_message.to_sentence}"
       erb :'/venues/edit.html'
     end
+  end
+
+  delete '/venues/:id' do
+    @venue = Post.find_by_id(params[:id])
+    redirect "/venues" unless @venue
+    @venue.update(deleted: true)
+    redirect "/venues/#{@venue.id}"
+
   end
 
 

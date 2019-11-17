@@ -1,0 +1,20 @@
+tours.erb rename to user_tour
+add a tours controller
+
+<% @user = User.find(session[:user_id]) %>
+<h2>"Let's get some gigs, <%=@user.first_name.capitalize%>!"</h2>
+
+<h3>Link to a venue for its details. </h3>
+<form action="/users/tour" method="POST">
+
+<% @venues.each do |venue| %>
+  <input type="checkbox" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>">    
+  <label for="<%= venue.id %>"><a href="<%= venue %>"><%= venue.name %></a></label>
+  <h5>      <%=venue.city%>, <%= venue.state%></h5>
+
+
+<% end %>
+  <h3>Check the venues you wish to tour.</h3>  
+  <input id="tours" type="submit" value="Create/Add Tour Item">
+
+  </form>

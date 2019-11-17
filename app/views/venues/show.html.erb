@@ -1,19 +1,23 @@
 show.erb - venues
 <%= @venue.id %>
 <%= @venue.name%>
+<%= @venue.booking %>
+<%= @venue.box_office %>
+<%= @venue.email %>
+<%= @venue.phone %>
+<%= @venue.description %>
+<%= @venue.website %>
+<%= @venue.address %>
+<%= @venue.city %>
+<%= @venue.state %>
+<%= @venue.postal_code %>
+<%= @venue.longitude %>
+<%= @venue.latitude %>
+<%= @venue.updated_at %>
 <a href="/venues/<%= @venue.id %>/edit">Edit Venue</a>
-<%= booking %>
-<%= box_office %>
-<%= email %>
-<%= password_digest %>
-<%= phone %>
-<%= description %>
-<%= website %>
-<%= address %>
-<%= city %>
-<%= state %>
-<%= postal_code %>
-<%= longitude %>
-<%= latitude %>
-<%= updated_at %>
+
+<form method="POST" action="/venues/<%= @venue.id %> ">
+  <input type="hidden" name="_method" value="delete" />
+  <button type="submit" value="Delete Post"> Delete Post </button>
+</form>
   

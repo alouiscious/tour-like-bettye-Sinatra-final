@@ -1,9 +1,8 @@
 tourdates.erb
 
-<h2>"Let's get some gigs, <%=@user.first_name.capitalize%>!"</h2>
+<h2>"Let's get some gigs, <%= @user.first_name.capitalize %>!"</h2>
 <div class="selected_venues">
-<h3>Click for venue details. </h3>
-<form action="/tourdates/<%= @user.id%>/edit" method="POST">
+<form action="/tourdates" method="POST">
 
   <% @tourdates.each do |tourdate| %>
     <% if @user.tourdates.include?(tourdate) %>
@@ -14,4 +13,15 @@ tourdates.erb
   <% end %>
 
 </form>  
+</div>
+
+<div >
+<form method="POST" action="/tourdates/new">
+  <% @venues.each do |venue| %>
+    <input type="checkbox" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>">    
+    <label for="<%= venue.id %>"><a href="<%= venue %>"><%= venue.name %></a></label>
+    <h5>      <%=venue.city%>, <%= venue.state%></h5>
+  <% end %>
+</form>
+</div>
 

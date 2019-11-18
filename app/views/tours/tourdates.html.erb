@@ -7,7 +7,7 @@ tourdates.erb
     <div class="new_tourdates">
     <form method="POST" action="/tourdates">
       <% @venues.each do |venue| %>
-        <input type="checkbox" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>" />    
+        <input type="radio" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>" />    
         <label for="<%= venue.id %>" value="<%= venue.id %>"><a href="/venue/:id %>"><%= venue.name %></a></label>
         <h5>      <%=venue.city%>, <%= venue.state%></h5>
       <% end %>
@@ -21,7 +21,7 @@ tourdates.erb
       <form action="/tourdates" method="POST">
       <% @venues.each do |venue| %>
         <input type="checkbox" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>" />    
-        <label for="<%= venue.id %>" value="<%= venue.id %>"><a href="/venue/:id %>"><%= venue.name %></a></label>
+        <label for="<%= venue.id %>" value="<%= venue.id %>"><a href="/venue/<%= venue.id %> "><%= venue.name %></a></label>
         <h5>      <%=venue.city%>, <%= venue.state%></h5>
       <% end %>
         <input type="submit" id="existing_tourdates" value="Research Tourdate">

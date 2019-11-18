@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @venues = Venue.visible
     @tourdates =Tourdate.all
     @user = Helpers.current_user(session)
-    binding.pry
+
 
 
     # if !params[:user].keys.include?("venue_ids")
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
   post '/tourdates' do       # collect users tourdates 
     Helpers.redirect_if_not_logged_in(session)    
-    @venues = Venue.all
+    # @venues = Venue.all
     @user = Helpers.current_user(session)
     @tourdates =Tourdate.all
 
@@ -42,25 +42,26 @@ class UsersController < ApplicationController
       # @user = User.find_by_id(params[:id])
     end
     @user = User.create(params[:user])
-    if !params[:user].empty?
-      @user.venues << Venue.create(name: params[:user])
+    if !params[:user][:venue_ids].empty?
+      @user.venues << User.create(venue_ids: params["venue"]["venue_ids"])
     end
-    redirect '/tourdates/new'
+    binding.pry
+    redirect "/tourdates/#{@user.id}"
   end
 
-  # get '/tourdates/:id' do    # renders the user's collected tour dates
-  #   Helpers.redirect_if_not_logged_in(session)             
-  #   # this route posts to :id/edit
-  #   # includes an edit option for the user's tourdates
-  #   erb :'/tours/edit.html'    
-  # end
+  get '/tourdates/:id' do    # renders the user's collected tour dates
+    Helpers.redirect_if_not_logged_in(session)             
+    # this route posts to :id/edit
+    # includes an edit option for the user's tourdates
+    erb :'/tours/edit.html'    
+  end
 
-  # post '/tourdates/:id/edit' do
-  #   @user = User.find(session[:user_id])
-  #   @venues = Venue.all
-  #   @tourdates = Tourdate.all
+  post '/tourdates/:id/edit' do
+    @user = User.find(session[:user_id])
+    @venues = Venue.all
+    @tourdates = Tourdate.all
 
-  # end
+  end
 
   # patch '/tourdates/:id' do
   #   Helpers.redirect_if_not_logged_in(session)    

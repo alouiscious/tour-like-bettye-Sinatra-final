@@ -11,7 +11,7 @@ class VenuesController < ApplicationController
       @user = User.find(session[:user_id])
       @venues = Venue.visible
       # @tourdates = q   # venues.html and button routes to tourdates/edit
-    binding.pry
+    # binding.pry
     end                             # has links that reveal each venue details
     erb :'/venues/bettye_venues'    
   end

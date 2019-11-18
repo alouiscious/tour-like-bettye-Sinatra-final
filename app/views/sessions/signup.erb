@@ -12,7 +12,7 @@ signup.erb
       <br><br>
       <label>Last Name: </label>
       <input id="last_name" type="text" name="last_name" required> *
-      <input id="fullname" type="hidden" name="fullname" value="user[:first_name][:last_name]">
+      <input id="fullname" type="hidden" name="fullname" value="<%= first_name %> <%= last_name%>">
       <br><br>
       <label>Band/Artist Name: </label>    
       <input id="bandname" type="text" name="bandname" >

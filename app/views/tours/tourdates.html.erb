@@ -1,27 +1,36 @@
 tourdates.erb
 
 <h2>"Let's get some gigs, <%= @user.first_name.capitalize %>!"</h2>
-<div class="selected_venues">
-<form action="/tourdates" method="POST">
+<table>
+  <td width="50%">
 
-  <% @tourdates.each do |tourdate| %>
-    <% if @user.tourdates.include?(tourdate) %>
-      <input type="checkbox" name="user[tourdate_ids][]" id="<%= tourdate.id %>" value="<%= tourdate.id %>" <%='checked' if @user.tourdates.include?(tourdate) %>> 
-      <label for="<%= tourdate.id %>"><a href="<%= tourdate %>"><%= tourdate.name %></a></label>
-      <h5>      <%=tourdate.city%>, <%= tourdate.state%></h5>
-    <% end %>
-  <% end %>
+    <div class="new_tourdates">
+    <form method="POST" action="/tourdates">
+      <% @venues.each do |venue| %>
+        <input type="checkbox" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>" />    
+        <label for="<%= venue.id %>" value="<%= venue.id %>"><a href="/venue/:id %>"><%= venue.name %></a></label>
+        <h5>      <%=venue.city%>, <%= venue.state%></h5>
+      <% end %>
+      <input type="submit" id="new_tourdates" value="Add Tourdate" />
+    </form>
+    </div>
+  </td>
 
-</form>  
-</div>
+  <td>
+    <div class="existing_tourdates">
+      <form action="/tourdates" method="POST">
+        <% if @tourdates.user_id == Helpers.current_user(session.user_id) %>
+              <% @venues.each do |venue| %>
 
-<div >
-<form method="POST" action="/tourdates/new">
-  <% @venues.each do |venue| %>
-    <input type="checkbox" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>">    
-    <label for="<%= venue.id %>"><a href="<%= venue %>"><%= venue.name %></a></label>
-    <h5>      <%=venue.city%>, <%= venue.state%></h5>
-  <% end %>
-</form>
-</div>
+          <input type="checkbox" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>" />    
+          <label for="<%= venue.id %>" value="<%= venue.id %>"><%='checked' if @user.venues.include?(venue) %><a href="/venue/:id %>"><%= venue.name %></a></label>
+          <h5>      <%=venue.city%>, <%= venue.state%></h5>
+        <% end %>
+      <% end %>
+        <input type="submit" id="existing_tourdates" value="Research Tourdate">
+      </form>  
+  </div>
+</td>
+
+</table>
 

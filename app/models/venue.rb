@@ -1,5 +1,5 @@
 class Venue < ActiveRecord::Base
-  validates :title, :content, presence: true
+  validates :name, :postal_code, presence: true
   has_many :users
   has_many :tourdates, through: :users
 

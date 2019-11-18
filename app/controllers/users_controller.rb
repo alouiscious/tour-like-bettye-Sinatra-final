@@ -2,27 +2,57 @@
 
 class UsersController < ApplicationController
   get '/tourdates' do
+    Helpers.redirect_if_not_logged_in(session)    
     @user = User.find(session[:user_id])
+    @venues = Venue.visible
+    @tourdates = Tourdate.all
+
+
+    erb :'/tours/tourdates.html'
+  end
+
+  get 'tourdates/new' do
+    Helpers.redirect_if_not_logged_in(session)  
     @venues = Venue.all
-    erb :'tours/tourdates.html'
+    @tourdates =Tourdate.all
+    @user = Helpers.current_user(session)
+
+    if !params[:user].keys.include?("venue_ids")
+      params[:user]["venue_ids"] = []
+      # @user = User.find_by_id(params[:id])
+    end
+    @user = User.create(params[:user])
+    if !params[:user].empty?
+      @user.venues << Venue.create(name: params[:user])
+    end
+
+
+    erb :'tours/new.html'
+    
   end
 
   post '/tourdates' do       # collect users tourdates 
-    binding.pry
-    @ve = Venue.create(user["venue_ids"])
-    @tourdates << @tourdate
-    redirect '/tourdates/new'
+    Helpers.redirect_if_not_logged_in(session)    
+    @venues = Venue.all
+    @user = Helpers.current_user(session)
+    @tourdates =Tourdate.all
+
+    if !params[:user].keys.include?("venue_ids")
+      params[:user]["venue_ids"] = []
+      # @user = User.find_by_id(params[:id])
+    end
+    @user = User.create(params[:user])
+    if !params[:user].empty?
+      @user.venues << Venue.create(name: params[:user])
+    end
+    redirect '/tourdates'
   end
 
   get '/tourdates/:id' do    # renders the user's collected tour dates
-
-
-                   
+    Helpers.redirect_if_not_logged_in(session)             
     # this route posts to :id/edit
     # includes an edit option for the user's tourdates
-
     erb :'/tours/tourdates'    
-
   end
 
   post '/tourdates/:id/edit' do
@@ -33,10 +63,16 @@ class UsersController < ApplicationController
   end
 
   patch '/tourdates/:id' do
+    Helpers.redirect_if_not_logged_in(session)    
     @venues = Venue.all
     @user = Helpers.current_user(session)
     @tourdates = Tourdates.all
 
+  end
+
+  delete '/tourdates/:id' do
+    session.clear
+    redirect '/'
   end
 
 

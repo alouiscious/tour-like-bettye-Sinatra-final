@@ -1,7 +1,7 @@
 tourdates.erb
 
 <h2>"Let's get some gigs, <%= @user.first_name.capitalize %>!"</h2>
-<table>
+<table width=100%>
   <td width="50%">
 
     <div class="new_tourdates">
@@ -19,13 +19,10 @@ tourdates.erb
   <td>
     <div class="existing_tourdates">
       <form action="/tourdates" method="POST">
-        <% if @tourdates.user_id == Helpers.current_user(session.user_id) %>
-              <% @venues.each do |venue| %>
-
-          <input type="checkbox" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>" />    
-          <label for="<%= venue.id %>" value="<%= venue.id %>"><%='checked' if @user.venues.include?(venue) %><a href="/venue/:id %>"><%= venue.name %></a></label>
-          <h5>      <%=venue.city%>, <%= venue.state%></h5>
-        <% end %>
+      <% @venues.each do |venue| %>
+        <input type="checkbox" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>" />    
+        <label for="<%= venue.id %>" value="<%= venue.id %>"><a href="/venue/:id %>"><%= venue.name %></a></label>
+        <h5>      <%=venue.city%>, <%= venue.state%></h5>
       <% end %>
         <input type="submit" id="existing_tourdates" value="Research Tourdate">
       </form>  

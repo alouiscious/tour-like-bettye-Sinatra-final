@@ -1,0 +1,74 @@
+show.html
+
+
+      <form method="POST" action="/tourdates/<%= @tourdate.id %>/edit">
+      <p>
+      
+        <%= @venue.name %>
+      <br>
+        <%= @venue.city %>
+       <%= @venue.state %>
+      <br>
+
+       <%= @venue.booking %>
+      
+        <%= @venue.box_office %>
+      <br>
+        <%= @venue.email %>
+      <br>
+        <%= @venue.phone %>
+      </p>
+
+
+      <p>
+        <%= @venue.description %>
+      <br>
+        <%= @venue.website %>
+      <p>
+      </p>
+        <%= @venue.address %>
+        <%= @venue.postal_code %>
+      <br>
+        <%= @venue.longitude %>
+        <%= @venue.latitude %>
+      <br>
+        <%= @venue.updated_at %>
+      </p>
+
+      <br>
+      <br>
+
+        <label for="status">Needs Contact</label>
+        <input type="checkbox" id="status" name="status" value="Needs Contact" <%= "checked" if @tourdate.status == true%>>
+      <br>
+      <br>
+        <label for="notes" style="display: block;">Tourdate Notes</label>
+        <textarea rows=7 cols=56 id="tourdate_notes" name="notes" value="<%= @tourdate.notes %>"> </textarea>
+      <br>
+      <br>
+      <br>
+      <br>
+
+        <input type="hidden" name="_method" value="patch" />
+        <input type="submit" id="edit_tourdate" value="Edit Tour Note" />
+      <br>
+      <br>
+      </form>
+      <br>      
+      <br>
+   </form>
+
+
+ 
+  <div class="sidebar">
+    <form method="post" action="/tourdates/<%= @venue.id %>">
+      <input type="hidden" name="_method" value="delete" />
+      <p style="font-size: 14;">
+        Use the button below to REMOVE this venue from your tour.
+        <br>
+        Please be advised all of your notes will be DELETED from your account.
+      </p>
+      <input type="submit" name="delete_tourdate" value="Delete Tourdate">
+    </form>
+   </div>
+

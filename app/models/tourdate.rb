@@ -1,4 +1,8 @@
 class Tourdate < ActiveRecord::Base
-  belongs_to :users
-  belongs_to :venues
+  belongs_to :user
+  belongs_to :venue
+
+  def venue_name
+    venue.name
+  end
 end

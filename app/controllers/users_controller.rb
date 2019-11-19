@@ -5,76 +5,80 @@ class UsersController < ApplicationController
     Helpers.redirect_if_not_logged_in(session)    
     @user = User.find(session[:user_id])
     @venues = Venue.visible
-    @tourdates = Tourdate.all
+    @tourdates = @user.tourdates
     erb :'/tours/tourdates.html'
   end
 
   get 'tourdates/new' do
     Helpers.redirect_if_not_logged_in(session)  
     @venues = Venue.visible
-    @tourdates =Tourdate.all
+    @tourdates = Tourdate.all
     @user = Helpers.current_user(session)
-
-
-
-    # if !params[:user].keys.include?("venue_ids")
-    #   params[:user]["venue_ids"] = []
-    #   # @user = User.find_by_id(params[:id])
-    # end
-    # @user = User.create(params[:user])
-    # if !params[:user].empty?
-    #   @user.venues << Venue.create(name: params[:user])
-    # end
-
-
     erb :'tours/new.html'
-    
   end
 
   post '/tourdates' do       # collect users tourdates 
     Helpers.redirect_if_not_logged_in(session)    
-    # @venues = Venue.all
+    @venues = Venue.all
     @user = Helpers.current_user(session)
     @tourdates =Tourdate.all
+    if params[:user].keys.include?("venue_ids")
+      @user.venue_ids=params[:user][:venue_ids]
 
-    if !params[:user].keys.include?("venue_ids")
-      params[:user]["venue_ids"] = []
-      # @user = User.find_by_id(params[:id])
     end
-    @user = User.create(params[:user])
-    if !params[:user][:venue_ids].empty?
-      @user.venues << User.create(venue_ids: params["venue"]["venue_ids"])
-    end
-    binding.pry
-    redirect "/tourdates/#{@user.id}"
+    redirect "/tourdates"
   end
 
   get '/tourdates/:id' do    # renders the user's collected tour dates
     Helpers.redirect_if_not_logged_in(session)             
-    # this route posts to :id/edit
+    @tourdate = Tourdate.find_by_id(params[:id])
+    @venue = @tourdate.venue
+    @page_title = "Edit #{@venue.name} Tourdate"    
+    erb :'/tours/show.html'    
+
+        # this route posts to :id/edit
     # includes an edit option for the user's tourdates
-    erb :'/tours/edit.html'    
   end
 
-  post '/tourdates/:id/edit' do
-    @user = User.find(session[:user_id])
-    @venues = Venue.all
-    @tourdates = Tourdate.all
+    # create tournotes
+  post "/tourdates/:id" do
+    Helpers.redirect_if_not_logged_in(session)             
+    @venue = Venue.find_by_id(params[:id])
+    @page_title = "Edit #{@venue.name} Tourdate" 
 
+    @tourdate = Tourdate.find_by(params[:id])
+    binding.pry
+    if params[:tourdates].include?("notes")
+
+      
+     redirect "/tourdates/#{@venue.id}"
+    else
+      @error = "Couldn't create tourdate note: #{@tourdate.errors.full_message.to_sentence}"
+      # erb :'/tourdates/edit.html'
+      redirect "/tourdates/#{@venue.id}"
+    end
+    
   end
 
-  # patch '/tourdates/:id' do
-  #   Helpers.redirect_if_not_logged_in(session)    
-  #   @venues = Venue.all
-  #   @user = Helpers.current_user(session)
-  #   @tourdates = Tourdates.all
+  patch '/tourdates/:id/edit' do
+    Helpers.redirect_if_not_logged_in(session)    
+    @user = Helpers.current_user(session)
+    @tourdate = @user.tourdates.find_by_id(params[:id])
+    # binding.pry
 
-  # end
+    # redirect "/tourdates" unless @tourdate
 
-  # delete '/tourdates/:id' do
-  #   session.clear
-  #   redirect '/'
-  # end
+    if @tourdate && @tourdate.update(notes: params[:notes], status: params[:status])
+      redirect "/tourdates/#{@venue.id}"
+    else
+      redirect '/tourdates'
+    end
+  end
+
+  delete '/tourdates/:id' do
+    session.clear
+    redirect '/'
+  end
 
 
   # get tourdates           venues - lists all and links to venues details(venue/:id and venue/show) 
@@ -91,9 +95,6 @@ class UsersController < ApplicationController
   # destroy tourdates       delete       
   # get tourdates/new       new - has a form to create a user's custom new venue
   
-  
-
-
 
 end
   

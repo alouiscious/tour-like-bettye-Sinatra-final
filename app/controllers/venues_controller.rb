@@ -22,7 +22,7 @@ class VenuesController < ApplicationController
   end
 
   # venue show route
-  get 'venues/:id' do
+  get '/venues/:id' do
     @venue = Venue.find(params[:id])
     @page_title = @venue.name
     erb :'/venues/show.html'
@@ -30,21 +30,19 @@ class VenuesController < ApplicationController
 
   # create venue
   post "/venues/:id" do
-    binding.pry
-
     @venue = Venue.create(name: params[:name], booking: params[:booking], box_office: params[:box_office], email: params[:email], phone: params[:phone], description: params[:description], website: params[:website], city: params[:city], state: params[:state])
     redirect "/venues/#{@venue.id}"
   end
   
   # post show route
-  get 'venues/:id/edit' do
+  get '/venues/:id/edit' do
     @venue = Venue.find(params[:id])
     @page_title = "Edit #{@venue.name}"
     erb :'/venues/edit.html'
   end
 
   # edit show route
-  patch 'venues/:id/edit' do
+  patch '/venues/:id/edit' do
     @venue = Venue.find_by_id(params[:id])
     @page_title = "Edit #{@venue.name}"
     redirect "/venues" unless @venue

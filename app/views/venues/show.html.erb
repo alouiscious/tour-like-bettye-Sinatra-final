@@ -1,5 +1,7 @@
 show.erb - venues
-<%= @venue.id %>
+<form method="POST" action="/venues/<%= @venue.id %>/edit">
+
+<p><%= @venue.id %></p>
 <%= @venue.name%>
 <%= @venue.booking %>
 <%= @venue.box_office %>
@@ -14,10 +16,11 @@ show.erb - venues
 <%= @venue.longitude %>
 <%= @venue.latitude %>
 <%= @venue.updated_at %>
-<a href="/venues/<%= @venue.id %>/edit">Edit Venue</a>
-
+<input type="hidden" name="_method" value="patch">
+<input type="submit" id="edit_venue" value="Edit Venue">
+</form>
 <form method="POST" action="/venues/<%= @venue.id %> ">
   <input type="hidden" name="_method" value="delete" />
-  <button type="submit" value="Delete Post"> Delete Post </button>
+  <button type="submit" value="Delete Venue"> Delete Post </button>
 </form>
   

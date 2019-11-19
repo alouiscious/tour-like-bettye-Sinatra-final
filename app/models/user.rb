@@ -7,12 +7,10 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :email, uniqueness: true
   
-  has_many :venues
-  has_many :tourdates, through: :venues
+  has_many :tourdates
+  has_many :venues, through: :tourdates
 
-  def self.fullname
-    User.all.each do |name|
-      @fullname = name.first_name name.last_name
-    end
+  def fullname
+    "#{first_name} #{last_name}"
   end
 end

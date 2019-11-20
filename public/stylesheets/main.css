@@ -104,7 +104,7 @@
   }
 
   .content, .sidebar {
-    float: none;
+    /* float: none; */
     width: 100%;
   }
 
@@ -123,6 +123,12 @@
   h2 {
     font-size: 18px;
     line-height: 24px;
+  }
+
+  .nav {
+    display: inline-block;
+    padding-right: 5px;
+    font-size: 10px;
   }
 }
 .img-responsive {

@@ -24,7 +24,6 @@ class UsersController < ApplicationController
     @tourdates =Tourdate.all
     if params[:user].keys.include?("venue_ids")
       @user.venue_ids=params[:user][:venue_ids]
-
     end
     redirect "/tourdates"
   end
@@ -32,9 +31,13 @@ class UsersController < ApplicationController
   get '/tourdates/:id' do    # renders the user's collected tour dates
     Helpers.redirect_if_not_logged_in(session)             
     @tourdate = Tourdate.find_by_id(params[:id])
-    @venue = @tourdate.venue
-    @page_title = "Edit #{@venue.name} Tourdate"    
-    erb :'/tours/show.html'    
+    if @tourdate
+      @venue = @tourdate.venue
+      @page_title = "Edit #{@venue.name} Tourdate"    
+      erb :'/tours/show.html' 
+    else
+      redirect '/tourdates'
+    end
 
         # this route posts to :id/edit
     # includes an edit option for the user's tourdates
@@ -43,9 +46,7 @@ class UsersController < ApplicationController
     # create tournotes
   post "/tourdates/:id" do
     Helpers.redirect_if_not_logged_in(session)             
-    @venue = Venue.find_by_id(params[:id])
-    @page_title = "Edit #{@venue.name} Tourdate" 
-
+   
     @tourdate = Tourdate.find_by(params[:id])
     binding.pry
     if params[:tourdates].include?("notes")
@@ -69,15 +70,18 @@ class UsersController < ApplicationController
     # redirect "/tourdates" unless @tourdate
 
     if @tourdate && @tourdate.update(notes: params[:notes], status: params[:status])
-      redirect "/tourdates/#{@venue.id}"
+      redirect "/tourdates/#{@tourdate.id}"
     else
       redirect '/tourdates'
     end
   end
 
   delete '/tourdates/:id' do
-    session.clear
-    redirect '/'
+    @user = Helpers.current_user(session)
+    # binding.pry
+    @tourdate = @user.tourdates.find_by_id(params[:id])
+    @tourdate.try(:destroy)
+    redirect "/tourdates"
   end
 
 
@@ -92,7 +96,7 @@ class UsersController < ApplicationController
   # put tourdates           update
 
   # get tourdates/:id/edit  edit - has a form to edit existing tourdates and venue selections
-  # destroy tourdates       delete       
+  # delete tourdates        delete       
   # get tourdates/new       new - has a form to create a user's custom new venue
   
 

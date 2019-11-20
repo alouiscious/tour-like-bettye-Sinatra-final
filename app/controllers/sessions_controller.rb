@@ -48,7 +48,7 @@ class SessionsController < ApplicationController
     erb :'/sessions/failure'
   end
 
-  get '/logout' do
+  post '/logout' do
     session.clear
     redirect '/'
   end

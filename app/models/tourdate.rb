@@ -4,5 +4,10 @@ class Tourdate < ActiveRecord::Base
 
   def venue_name
     venue.name
+  
+  end
+  
+  def venue_desc
+    venue.description
   end
 end

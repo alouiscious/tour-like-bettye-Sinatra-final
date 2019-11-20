@@ -12,6 +12,7 @@
 /tmp/
 key.txt
 spec.md
+user_venues copy.erb
 
 # Used by dotenv library to load environment variables.
 # .env

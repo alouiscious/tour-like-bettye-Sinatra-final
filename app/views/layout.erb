@@ -1,4 +1,3 @@
-layout.erb
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
@@ -18,13 +17,7 @@ layout.erb
 
     <div class="wrapper">
 
-    <div class="nav">
-    <a href="/tourdates">Create Tour</a>
-    <a href="/venues">Venues</a>
-    <a href="/login">Login</a>
-    <a href="/signup">Signup</a>
-    <a href="/delete">Logut</a>
-    </div>
+
 
     <div class="container">
       <header><img src="/images/TLB_hdr01.jpeg" class="img-responsive main-image"></header>
@@ -35,6 +28,13 @@ layout.erb
         <%= yield %>
 
       <footer class="branding">
+        <div class="nav">
+          <a href="/tourdates">Create Tour</a>
+          <a href="/venues">Venues</a>
+          <a href="/login">Login</a>
+          <a href = "/signup">Signup</a>
+          <a href = "/logout">Logout</a>
+          </div>
         <small>&copy; 2019 <strong>TourLikeBettye - Cherub Productions LLC</strong></small>
       </footer>
     </div>

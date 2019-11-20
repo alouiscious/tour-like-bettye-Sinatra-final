@@ -14,5 +14,5 @@ run ApplicationController
 # run VenuesController
 use SessionsController
 use VenuesController
-use UsersController
+use TourdatesController
 

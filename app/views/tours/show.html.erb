@@ -19,32 +19,31 @@ show.html
     <%= @venue.city %>, 
     <%= @venue.state %>
   </p>
-
   <p>
     <%= @venue.booking %>
     <%= @venue.box_office %>
     <%= @venue.email %>
     <%= @venue.phone %>
   </p>
-
   <p>
       <%= @venue.website %>
   </p>
   <p>
     <%= @venue.address %>
     <br>
-  <%= @venue.postal_code %>
+    <%= @venue.postal_code %>
   </p>
   <p>
     <%= @venue.longitude %> <%= @venue.latitude %>
   </p>
   <p>
-          <%= @venue.updated_at %>
+    <%= @venue.updated_at %>
   </p>
 
-<p>
+  <p>
   <%= @venue.description%>
-
+  </p>
+  <p>
     <label for="status">Needs Contact</label>
     <input type="checkbox" id="status" name="status" value="Needs Contact" <%= "checked" if @tourdate.status == true%>>
   </p>

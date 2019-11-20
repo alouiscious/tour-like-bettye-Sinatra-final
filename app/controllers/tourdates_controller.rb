@@ -1,6 +1,5 @@
-# require './config/environment'
 
-class UsersController < ApplicationController
+class TourdatesController < ApplicationController
   get '/tourdates' do
     Helpers.redirect_if_not_logged_in(session)    
     @user = User.find(session[:user_id])
@@ -48,15 +47,15 @@ class UsersController < ApplicationController
     Helpers.redirect_if_not_logged_in(session)             
    
     @tourdate = Tourdate.find_by(params[:id])
-    binding.pry
+    # binding.pry
     if params[:tourdates].include?("notes")
 
       
-     redirect "/tourdates/#{@venue.id}"
+     redirect "/tourdates/#{@tourdates.id}"
     else
       @error = "Couldn't create tourdate note: #{@tourdate.errors.full_message.to_sentence}"
       # erb :'/tourdates/edit.html'
-      redirect "/tourdates/#{@venue.id}"
+      redirect "/tourdates/#{@tourdates.id}"
     end
     
   end
@@ -65,7 +64,6 @@ class UsersController < ApplicationController
     Helpers.redirect_if_not_logged_in(session)    
     @user = Helpers.current_user(session)
     @tourdate = @user.tourdates.find_by_id(params[:id])
-    # binding.pry
 
     # redirect "/tourdates" unless @tourdate
 

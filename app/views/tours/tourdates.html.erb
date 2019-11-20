@@ -1,33 +1,40 @@
-tourdates.erb
-
 <h2>"Let's get some gigs, <%= @user.first_name.capitalize %>!"</h2>
 <table width=100%>
-  <td width="50%">
+  <tr>
+    <td>Available Tourdates</td>
+    <td>Your Tourdates</td>
+  </tr>
+  <tr>
+    <td width="60%">
+      <div class="new_tourdates">
+        <form method="POST" action="/tourdates">
+          <h5 style="color: rgb(168, 69, 69);">
+            Check these venues,<br> then use Create/Add button. 
+          </h5>
+          <br>
+          <% @venues.each do |venue| %>
+            <input type="checkbox" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>" <%='checked' if @user.venues.include?(venue) %> />    
+            <label for="<%= venue.id %>" value="<%= venue.id %>"><a href="/venues/<%= venue.id %>"><%= venue.name %></a></label>
+            <h5>      <%=venue.city%>, <%= venue.state%></h5>
+          <% end %>
+          <input type="submit" id="new_tourdates" value="Add Tourdate" />
+        </form>
+      </div>
+    </td>
 
-    <div class="new_tourdates">
-    <form method="POST" action="/tourdates">
-      <% @venues.each do |venue| %>
-      
-        <input type="checkbox" name="user[venue_ids][]" id="<%= venue.id %>" value="<%= venue.id %>" <%='checked' if @user.venues.include?(venue) %> />    
-        <label for="<%= venue.id %>" value="<%= venue.id %>"><a href="/venues/<%= venue.id %>"><%= venue.name %></a></label>
-        <h5>      <%=venue.city%>, <%= venue.state%></h5>
-      <% end %>
-      <input type="submit" id="new_tourdates" value="Add Tourdate" />
-    </form>
-    </div>
-  </td>
-
-  <td>
-    <div class="existing_tourdates">
-      <% @tourdates.each do |tourdate| %>
-        <p>
+    <td style="display: padding:">
+      <div class="existing_tourdates">
+        <h5>
+          The links below reveal your tourdate info. <br>So, go get gigs!
+        </h5>
+        <br>
+        <% @tourdates.each do |tourdate| %>
           <a href="/tourdates/<%= tourdate.id %>"><%= tourdate.venue_name %></a>
           <h5>      <%=tourdate.venue.city%>, <%= tourdate.venue.state%></h5>
-        </p>
-      <% end %>
+        <% end %>
 
-  </div>
-</td>
-
+      </div>
+     </td>
+  </tr>
 </table>
 

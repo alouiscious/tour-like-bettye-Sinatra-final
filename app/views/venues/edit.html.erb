@@ -1,15 +1,40 @@
-  <div class="custom_venue">
+  <div class="venue_details">
       <h1>Edit Your Custom Venue</h1>
-      <a href="/venues/<%= @venue.id %>/edit ">Reload</a>
-      <form action="/venues/<%= @venue.id %>" method="POST">
+      <h5><a href="/venues/<%= @venue.id %>/edit ">Reload</a></h5>
+      <form action="/venues/<%= @venue.id %>/edit" method="POST">
         <input id="hidden" type="hidden" name="_method" value="patch">
         <label for="name" style="display: block;" >Venue Name: </label>
-        <br>
         <input type="text" name="name" id="venue_name" value="<%= @venue.name %>" />
-        <br>
-        <br>
-      
-        <input id="update_venue " type="submit" value="Update Venue">
+      <br>
+        <label for="address" style="display: block;" >Address: </label>
+        <input type="text" name="address" id="venue_address" value="<%= @venue.address %>" />
+      <br>        
+        <label for="city" style="display: block;" >City: </label>
+        <input type="text" name="city" id="venue_city" value="<%= @venue.city %>" />
+      <br>        
+        <label for="state" style="display: block;" >State: </label>
+        <input type="text" name="state" id="venue_state" value="<%= @venue.state %>" />
+      <br>        
+        <label for="postal_code" style="display: block;" >Zip Code: </label>
+        <input type="text" name="postal_code" id="venue_postal_code" value="<%= @venue.postal_code %>" />
+      <br>        
+        <label for="booking" style="display: block;" >Booking: </label>
+        <input type="text" name="booking" id="venue_booking" value="<%= @venue.booking %>" />
+      <br>        
+        <label for="box_office" style="display: block;" >Box Office: </label>
+        <input type="text" name="name" id="venue_name" value="<%= @venue.name %>" />
+      <br>        
+        <label for="phone" style="display: block;" >Phone: </label>
+        <input type="text" name="phone" id="venue_phone" value="<%= @venue.phone %>" />
+      <br>        
+        <label for="website" style="display: block;" >Website: </label>
+        <input type="text" name="website" id="venue_website" value="<%= @venue.website %>" />
+      <br>        
+        <label for="description" style="display: block;" >Description: </label>
+        <textarea type="text" rows="7" cols="56" name="description" id="venue_description" value="<%= @venue.description %>" </textarea> 
+      <br>
+      <br>
+        <input id="update_venue " type="submit" value="Update Venue Details">
     </form>
     
   </div>

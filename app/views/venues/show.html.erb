@@ -1,26 +1,49 @@
-show.erb - venues
 <form method="POST" action="/venues/<%= @venue.id %>/edit">
+  <h3>
+    <%= @venue.name %>
+  </h3>
+  <h5>
+    <%= @venue.address %>
+  </h5>
+  <h5>
+    <%= @venue.city %>, 
+    <%= @venue.state %>
+    <%= @venue.postal_code %>
+  </h5>
 
-<p><%= @venue.id %></p>
-<%= @venue.name%>
-<%= @venue.booking %>
-<%= @venue.box_office %>
-<%= @venue.email %>
-<%= @venue.phone %>
-<%= @venue.description %>
-<%= @venue.website %>
-<%= @venue.address %>
-<%= @venue.city %>
-<%= @venue.state %>
-<%= @venue.postal_code %>
-<%= @venue.longitude %>
-<%= @venue.latitude %>
-<%= @venue.updated_at %>
-<input type="hidden" name="_method" value="patch">
-<input type="submit" id="edit_venue" value="Edit Venue">
+    <br>
+  <h5>Phone: 
+    <%= @venue.booking %>
+  </h5>
+  <h5>Box Office:
+    <%= @venue.box_office %>
+  </h5>
+  <h5>Email:
+    <%= @venue.email %>
+  </h5>
+  <h5>Phone:
+    <%= @venue.phone %>
+  </h5>
+  <h5>Website:
+      <%= @venue.website %>
+  </h5>
+  <h5>Lon/Lat:
+    <%= @venue.longitude %> <%= @venue.latitude %>
+  </h5>
+  <h5>Info Last Updated:
+    <%= @venue.updated_at %>
+   </h5>
+  <h5>Description:
+  <%= @venue.description%>
+  </h5>
+  <p>
+  <input type="hidden" name="_method" value="patch">
+  <h5>
+    Update this venue listing. Click here to
+    <input type="submit" id="edit_venue" value="Edit/Add Venue Details">     
+    <br>
+    <a href="/venues">Back to Venue List</a>
+  </h5>
 </form>
-<form method="POST" action="/venues/<%= @venue.id %> ">
-  <input type="hidden" name="_method" value="delete" />
-  <button type="submit" value="Delete Venue"> Delete Post </button>
-</form>
+
   

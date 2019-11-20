@@ -30,7 +30,7 @@ class VenuesController < ApplicationController
 
   # create venue
   post "/venues/:id" do
-    @venue = Venue.create(name: params[:name], booking: params[:booking], box_office: params[:box_office], email: params[:email], phone: params[:phone], description: params[:description], website: params[:website], city: params[:city], state: params[:state])
+    @venue = Venue.update(name: params[:name], booking: params[:booking], box_office: params[:box_office], email: params[:email], phone: params[:phone], description: params[:description], website: params[:website], city: params[:city], state: params[:state])
     redirect "/venues/#{@venue.id}"
   end
   
@@ -43,13 +43,18 @@ class VenuesController < ApplicationController
 
   # edit show route
   patch '/venues/:id/edit' do
+    Helpers.redirect_if_not_logged_in(session)    
     @venue = Venue.find_by_id(params[:id])
     @page_title = "Edit #{@venue.name}"
+
     redirect "/venues" unless @venue
+        # binding.pry
+
     if @venue.update(name: params[:name], booking: params[:booking], box_office: params[:box_office], email: params[:email], phone: params[:phone], description: params[:description], website: params[:website], city: params[:city], state: params[:state])
+      
       redirect "/venues/#{@venue.id}"
     else
-      @error = "Venue couldn't update: #{@venue.errors.full_message.to_sentence}"
+      @error = "Venue couldn't update: "
       erb :'/venues/edit.html'
     end
   end

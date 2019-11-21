@@ -44,13 +44,8 @@ class TourdatesController < ApplicationController
 
     # create tournotes
   post "/tourdates/:id" do
-    Helpers.redirect_if_not_logged_in(session)             
-   
     @tourdate = Tourdate.find_by(params[:id])
-    # binding.pry
     if params[:tourdates].include?("notes")
-
-      
      redirect "/tourdates/#{@tourdates.id}"
     else
       @error = "Couldn't create tourdate note: #{@tourdate.errors.full_message.to_sentence}"
